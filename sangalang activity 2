@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int Age;
+    string usn, ln, fn, mn, yearProgram;
+
+    cout << "===== AMA Student Portal =====\n\n";
+    cout << "Please fill up the following \n\n";
+
+    cout << "USN: ";
+    cin >> usn;
+
+    cout << "Last Name: ";
+    cin >> ln;
+
+    cout << "First Name: ";
+    cin >> fn;
+
+    cout << "Middle Name: ";
+    cin >> mn;
+
+    cout << "Age: ";
+    cin >> Age;
+    
+    cout << "Year & Program: ";
+    cin  >> yearProgram;
+
+       
+
+    cout << "\n____________________________\n";
+    cout << "Student Information" << endl;
+    cout << "USN: " << usn << endl;
+    cout << "Lastname: " << ln << endl;
+    cout << "Firstname: " << fn << endl;
+    cout << "Middlename: " << mn << endl;
+    cout << "Age: " << Age << endl;
+    cout << "Year and Program: " << yearProgram << endl << endl;
+
+    cout << "WELCOME " << fn << " " << mn << " " << ln << " to AMACC Lipa\n";
+
+    return 0;
+}
