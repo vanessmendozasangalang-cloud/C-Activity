@@ -1,0 +1,134 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+struct Package {
+    string name;
+    double price;
+    vector<string> contents;
+};
+
+int main() {
+    vector<Package> packages = {
+        {"Pork Package", 1000.00, {
+            "Fresh Meat Samgyupsal Thin or Thick Cut (500g)",
+            "Marinated Pork (500g)",
+            "Vegetable Set",
+            "Kinds of side dishes and Bean Pasta Stew",
+            "Pork Belly Lemon",
+            "Marinated Bacon"
+        }},
+        {"Beef Package", 1500.00, {
+            "US Marbled Beef (300g)",
+            "Tender Beef (300g)",
+            "Beef Belly (300g)",
+            "Fresh Vegetable Set",
+            "Kinds of side dishes",
+            "Kani Bacon"
+        }},
+        {"Chicken Package", 1200.00, {
+            "Marinated Chicken Thin and Thick Cut",
+            "Chicken Barbecue",
+            "Spicy Fried Chicken",
+            "Fresh Vegetable Set",
+            "Kinds of side dishes",
+            "Grill Chicken"
+        }},
+        {"Seafood Package", 1300.00, {
+            "Grilled Shrimp",
+            "Squid Rings",
+            "Steamed Clams",
+            "Grilled Octopus",
+            "Spicy Tuna Sashimi",
+            "Grilled Salmon"
+        }},
+        {"All in One Package", 6000.00, {
+            "All packages combined (All meat, seafood, and chicken sets)"
+        }}
+    };
+
+    vector<Package> orders;
+    char choice;
+    double total = 0.0, payment, tax, change;
+
+    cout << "========================================\n";
+    cout << "   Vanessa's   Samgyeopsal \n";
+    cout << "========================================\n\n";
+
+    do {
+        cout << "Samgyupsal Packages for Today:\n";
+        for (size_t i = 0; i < packages.size(); ++i) {
+            cout << i + 1 << ". " << packages[i].name << endl; // prices hidden
+        }
+
+        int option;
+        cout << "\nChoose your Samgyupsal Package (1-5): ";
+        cin >> option;
+
+        if (option >= 1 && option <= 5) {
+            Package selected = packages[option - 1];
+            orders.push_back(selected);
+
+            cout << "\nYou have selected: " << selected.name << endl;
+            cout << "Package Inclusions:\n";
+            for (const auto &item : selected.contents) {
+                cout << " - " << item << endl;
+            }
+            cout << endl;
+        } else {
+            cout << "Invalid selection. Please choose between 1 and 5.\n\n";
+            continue;
+        }
+
+        cout << "Do you want to order another package? (Y/N): ";
+        cin >> choice;
+        cout << endl;
+
+    } while (toupper(choice) == 'Y');
+
+    // When user selects "N" → display receipt with all prices
+    cout << "\n========================================\n";
+    cout << "          Vanessa's Samgyeopsal   \n";
+    cout << "========================================\n";
+
+    cout << "\nYou have ordered the following packages:\n";
+    for (const auto &order : orders) {
+        cout << " - " << order.name << " (₱" << fixed << setprecision(2) << order.price << ")\n";
+        total += order.price;
+    }
+
+    tax = total * 0.12;
+    double totalWithTax = total + tax;
+
+    cout << "\nSamgyupsal Price: ₱" << total;
+    cout << "\nTax (12%): ₱" << tax;
+    cout << "\nTotal Price: ₱" << totalWithTax;
+
+    
+do{
+    cout << "\n\nEnter Payment Amount: ₱";
+    cin >> payment;
+    if (payment < totalWithTax) {
+        cout << "Insufficient payment. Transaction cancelled.\n";
+        
+    }
+}while (payment < totalWithTax);
+    change = payment - totalWithTax;
+if(change != 0){
+    cout << "your change is: ₱" << fixed << setprecision(2) << change<<"\n";
+}
+else {
+    cout << "you have paid exact amount"  << endl;
+}
+    cout << fixed << setprecision(2);
+    
+
+    cout << "\nThank you for ordering with us. Goodbye!\n";
+    cout << "========================================\n";
+
+    return 0;
+}
